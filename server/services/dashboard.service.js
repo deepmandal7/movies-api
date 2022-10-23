@@ -2,7 +2,6 @@ const pool = require("../../config/database");
 
 const addMovie = async (body, email) => {
     const { movie_name, rating, movie_cast, genre, release_date } = body;
-    console.log("here");
     const response = await pool
         .query("select * from add_movie($1, $2, $3, $4, $5, $6)", [
             movie_name,
@@ -19,7 +18,6 @@ const addMovie = async (body, email) => {
 };
 
 const getAllMovies = async (params) => {
-    console.log("here");
     const response = await pool
         .query("select * from get_all_movies($1)", [params.email])
         .catch((err) => {
@@ -29,7 +27,6 @@ const getAllMovies = async (params) => {
 };
 
 const updateMovie = async (params, body) => {
-    console.log("here");
     const response = await pool
         .query("select * from update_movie($1, $2, $3, $4, $5, $6)", [
             params.movie_id,
@@ -46,7 +43,6 @@ const updateMovie = async (params, body) => {
 };
 
 const deleteMovie = async (params) => {
-    console.log("here");
     const response = await pool
         .query("select * from delete_movie($1)", [params.movie_id])
         .catch((err) => {

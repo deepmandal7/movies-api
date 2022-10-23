@@ -76,9 +76,6 @@ app.use(express.static("../public"));
 // });
 
 app.get("/", (req, res) => {
-    console.log(5);
-    console.log(req.session.user);
-    console.log(req.cookies.user_sid);
     if (req.session.user && req.cookies.user_sid) {
         res.redirect("/dashboard");
     } else {
@@ -93,9 +90,6 @@ app.get("/logout", (req, res) => {
     }
 });
 app.route("/login").get((req, res) => {
-    console.log(1);
-    console.log(req.session.user);
-    console.log(req.cookies.user_sid);
     if (req.session.user && req.cookies.user_sid) {
         res.redirect("/dashboard");
     } else {
@@ -103,9 +97,6 @@ app.route("/login").get((req, res) => {
     }
 });
 app.route("/register").get((req, res) => {
-    console.log(2);
-    console.log(req.session.user);
-    console.log(req.cookies.user_sid);
     if (req.session.user && req.cookies.user_sid) {
         res.redirect("/dashboard");
     } else {
@@ -113,15 +104,10 @@ app.route("/register").get((req, res) => {
     }
 });
 app.route("/dashboard").get(async (req, res) => {
-    console.log(3);
-    console.log(req.session.user);
-    console.log(req.cookies.user_sid);
     if (req.session.user && req.cookies.user_sid) {
-        console.log(req.session.user.email);
         let movies = await require("../server/services").getAllMovies(
             req.session.user
         );
-        console.log(movies);
         res.render("pages/dashboard", {
             list: movies,
         });

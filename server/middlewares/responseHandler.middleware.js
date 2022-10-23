@@ -1,6 +1,5 @@
 const responseHandlerMiddleware = (status, req, res, next) => {
     if (status !== 200) {
-        console.error(res.exception || res.error);
         res.status(status).send({
             status: "error",
             message: res.exception || res.error,

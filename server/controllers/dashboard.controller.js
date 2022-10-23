@@ -13,20 +13,16 @@ const addMovie = catchAsync(async (req, res, next) => {
 });
 const getAllMovies = catchAsync(async (req, res, next) => {
     const response = await getAll(req.session.user);
-    console.log(response);
     if (response.length) {
         res.movies = response;
     }
-    console.log(res.movies);
     res.redirect("/dashboard");
 });
 const updateMovie = catchAsync(async (req, res, next) => {
     const response = await update(req.params);
-    console.log(response);
     if (response.length) {
         res.movies = response;
     }
-    console.log(res.movies);
     res.redirect("/dashboard");
 });
 const removeMovie = catchAsync(async (req, res, next) => {});

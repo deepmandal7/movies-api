@@ -6,8 +6,6 @@ const {
 const pool = require("../../config/database");
 
 const registerUser = catchAsync(async (req, res, next) => {
-    console.log("session ---------", req.session.user);
-    console.log("cookies ---------", JSON.stringify(req.cookies));
     const { email, password } = req.body;
     const user = await pool.query("select * from find_user_by_email($1)", [
         email,
@@ -22,7 +20,7 @@ const registerUser = catchAsync(async (req, res, next) => {
         saltHash.salt,
         saltHash.hash,
     ]);
-    console.log(response.rows);
+
     if (response.rowCount) {
         req.session.user = { email: response.rows[0].create_user };
         res.redirect("/dashboard");
@@ -31,11 +29,9 @@ const registerUser = catchAsync(async (req, res, next) => {
 
 const logIn = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
-    console.log(email);
     const user = await pool.query("select * from find_user_by_email($1)", [
         email,
     ]);
-    console.log(user);
     if (user.rowCount) {
         const isValid = validatePassword(
             password,
@@ -43,7 +39,6 @@ const logIn = catchAsync(async (req, res, next) => {
             user.rows[0].salt
         );
         if (isValid) {
-            console.log("logged in");
             req.session.user = { email };
             res.redirect("/dashboard");
         }
