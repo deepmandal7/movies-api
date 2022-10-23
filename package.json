@@ -1,0 +1,29 @@
+{
+  "name": "Node_API",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "connect-pg-simple": "^7.0.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "crypto-js": "^4.1.1",
+    "dot-env": "^0.0.1",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "find-config": "^1.0.0",
+    "helmet": "^6.0.0",
+    "morgan": "^1.10.0",
+    "node-postgres": "^0.6.2",
+    "nodemon": "^2.0.20",
+    "passport": "^0.6.0",
+    "pg": "^8.8.0"
+  }
+}

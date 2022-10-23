@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <title>Login Here</title>
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body class="container">
+        <div class="page-header">
+            <h1>Your Movies</h1>
+        </div>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div
+                    class="collapse navbar-collapse"
+                    id="bs-example-navbar-collapse-1"
+                >
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/signup">Sign Up</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login">Log In</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <form autocomplete="off" action="/api/dashboard" method="post">
+            <div class="form-group">
+                <label>Name:</label>
+                <input
+                    class="form-control"
+                    required
+                    type="text"
+                    name="movie_name"
+                />
+            </div>
+            <div class="form-group">
+                <label>Rating:</label>
+                <input
+                    class="form-control"
+                    required
+                    type="number"
+                    name="rating"
+                />
+            </div>
+            <div class="form-group">
+                <label>Cast:</label>
+                <input
+                    class="form-control"
+                    required
+                    type="text"
+                    name="movie_cast"
+                />
+            </div>
+            <div class="form-group">
+                <label>Genre:</label>
+                <input class="form-control" required type="text" name="genre" />
+            </div>
+            <div class="form-group">
+                <label>Release date:</label>
+                <input
+                    class="form-control"
+                    required
+                    type="date"
+                    name="release_date"
+                />
+            </div>
+            <div id="add-movie" class="form-group">
+                <input
+                    class="btn btn-primary"
+                    type="submit"
+                    value="Add a movie"
+                />
+            </div>
+        </form>
+        <div class="container row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Movie Name</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col">Cast</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Release Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%list.forEach(function(entry) {%>
+                    <tr>
+                        <td hidden><%=entry.movie_id%></td>
+                        <td class="text-dark"><%=entry.movie_name%></td>
+                        <td class="text-dark"><%=entry.rating%></td>
+                        <td class="text-dark">
+                            <%entry.movie_cast.forEach(function(cast) {%>
+                            <p><p%cast%></p>
+                            <%});%>
+                        </td>
+                        <td class="text-dark"><%=entry.genre%></td>
+                        <td class="text-dark"><%=entry.release_date%></td>
+                        <td id="edit-movie" class="text-dark">
+                            <button type="button" class="btn btn-secondary">
+                                Edit
+                            </button>
+                        </td>
+                        <td class="text-dark">
+                            <button
+                                type="button"
+                                value=""
+                                class="btn btn-secondary"
+                            >
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    <%});%>
+                </tbody>
+            </table>
+        </div>
+    </body>
+    <script type="text/javascript">
+        function toggleAddButton() {
+            let x = document.getElementById("add-movie");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+</html>
