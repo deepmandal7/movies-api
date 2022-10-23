@@ -85,6 +85,13 @@ app.get("/", (req, res) => {
         res.redirect("/login");
     }
 });
+
+app.get("/logout", (req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.clearCookie("user_sid");
+        res.redirect("/login");
+    }
+});
 app.route("/login").get((req, res) => {
     console.log(1);
     console.log(req.session.user);
